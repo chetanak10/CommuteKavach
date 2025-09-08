@@ -1,6 +1,6 @@
 # CommuteIQ – Hyperlocal Commute & Safety Assistant (Backend, Solo‑MVP)
 
-An overnight‑buildable backend that scores daily routes using live ETA, weather, and air quality, lets users report nearby incidents, and pushes low‑score alerts over WebSocket.
+Backend that scores daily routes using live ETA, weather, and air quality, lets users report nearby incidents, and pushes low‑score alerts over WebSocket.
 
 ## ✨ Features (MVP)
 - JWT auth (email/password)
