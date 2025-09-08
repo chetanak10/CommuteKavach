@@ -1,0 +1,234 @@
+{
+  "info": {
+    "name": "CommuteIQ Solo-MVP",
+    "_postman_id": "b7f4af3b-1234-4d5f-8b5c-commuteiq",
+    "description": "Auth, routes, incidents, health, and WS instructions.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Register",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/auth/register",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "auth",
+            "register"
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\"email\": \"me@example.com\", \"password\": \"secret123\"}"
+        }
+      }
+    },
+    {
+      "name": "Login",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "let data = pm.response.json();",
+              "pm.environment.set('token', data.access_token);"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/auth/login",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "auth",
+            "login"
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\"email\": \"me@example.com\", \"password\": \"secret123\"}"
+        }
+      }
+    },
+    {
+      "name": "Save Route",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/routes",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "routes"
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\"name\": \"Home\\u2192Campus\", \"from\": {\"lat\": 19.076, \"lng\": 72.8777}, \"to\": {\"lat\": 19.073, \"lng\": 72.899}}"
+        }
+      }
+    },
+    {
+      "name": "List Routes",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/routes",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "routes"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Score Route (id=1)",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/routes/1/score",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "routes",
+            "1",
+            "score"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Report Incident",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/incidents/report",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "incidents",
+            "report"
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\"lat\": 19.075, \"lng\": 72.879, \"type\": \"ACCIDENT\", \"severity\": 3, \"description\": \"minor crash\"}"
+        }
+      }
+    },
+    {
+      "name": "Nearby Incidents",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/incidents/nearby?lat=19.075&lng=72.879&radius=1000",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "incidents",
+            "nearby"
+          ],
+          "query": [
+            {
+              "key": "lat",
+              "value": "19.075"
+            },
+            {
+              "key": "lng",
+              "value": "72.879"
+            },
+            {
+              "key": "radius",
+              "value": "1000"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Health",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "{{baseUrl}}/healthz",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "healthz"
+          ]
+        }
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8080"
+    }
+  ]
+}

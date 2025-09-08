@@ -1,0 +1,21 @@
+services:
+  - type: web
+    name: commuteiq-backend
+    env: node
+    buildCommand: "npm ci && npm run build"
+    startCommand: "node dist/server.js"
+    envVars:
+      - key: NODE_VERSION
+        value: 20
+      - key: DATABASE_URL
+        sync: false
+      - key: JWT_SECRET
+        sync: false
+      - key: MAPS_API_KEY
+        sync: false
+      - key: OWM_API_KEY
+        sync: false
+      - key: WAQI_TOKEN
+        sync: false
+databases:
+  - name: commuteiq-postgres
