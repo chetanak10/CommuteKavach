@@ -1,4 +1,4 @@
-# CommuteIQ – Hyperlocal Commute & Safety Assistant (Backend, Solo‑MVP)
+# CommuteKavach – Hyperlocal Commute & Safety Assistant (Backend, Solo‑MVP)
 
 Backend that scores daily routes using live ETA, weather, and air quality, lets users report nearby incidents, and pushes low‑score alerts over WebSocket.
 
